@@ -6,10 +6,10 @@ import 'package:hotreloader/hotreloader.dart';
 void withHotreload(FutureOr<HttpServer> Function() initializer) async {
   HttpServer? runningServer;
 
-  var obtainNewServer = (FutureOr<HttpServer> newServer) async {
+  var obtainNewServer = (FutureOr<HttpServer> Function() initializer) async {
     var willReplaceServer = runningServer != null;
     await runningServer?.close(force: true);
-    runningServer = await newServer;
+    runningServer = await initializer();
 
     if (willReplaceServer) {
       print('\nApplication reloaded.');
@@ -18,7 +18,7 @@ void withHotreload(FutureOr<HttpServer> Function() initializer) async {
 
   try {
     await HotReloader.create(onAfterReload: (ctx) {
-      obtainNewServer(initializer());
+      obtainNewServer(initializer);
     });
     print('[shelf_hotreload] Hot reload is enabled.');
   } on StateError catch (e) {
@@ -30,5 +30,5 @@ void withHotreload(FutureOr<HttpServer> Function() initializer) async {
     }
   }
 
-  await obtainNewServer(initializer());
+  await obtainNewServer(initializer);
 }
