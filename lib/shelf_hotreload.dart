@@ -1,6 +1,4 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
+/// Hot reload wrapper for `shelf`
 library shelf_hotreload;
 
 export 'src/base.dart';
