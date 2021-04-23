@@ -1,22 +1,21 @@
-A library for Dart developers.
-
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+Wrapper to easily enable hot-reload for shelf applications. 
 
 ## Usage
 
-A simple usage example:
-
 ```dart
+import 'dart:io';
+
+import 'package:shelf/shelf.dart' as shelf;
+import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_hotreload/shelf_hotreload.dart';
 
-main() {
-  var awesome = new Awesome();
+HttpServer? server;
+
+void main() async { // Run this app with --enable-vm-service (or use debug run)
+  withHotreload(() {
+    var handler = (shelf.Request request) => shelf.Response.ok('hot!');
+
+    return io.serve(handler, 'localhost', 8080); // return HttpServer instance
+  });
 }
 ```
-
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-[tracker]: http://example.com/issues/replaceme

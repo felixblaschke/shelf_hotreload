@@ -1,5 +1,5 @@
 name: shelf_hotreload
-description: A starting point for Dart libraries or applications.
+description: Wrapper to easily enable hot-reload for shelf applications.
 version: 0.0.1
 repository: https://github.com/felixblaschke/shelf_hotreload
 
