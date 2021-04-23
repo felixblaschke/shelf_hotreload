@@ -20,3 +20,7 @@ void main() async { // Run this app with --enable-vm-service (or use debug run)
 }
 ```
 
+In order to enable hot-reload you need to run your Dart application with `--enable-vm-service`. For example:
+```
+dart --enable-vm-service path/to/app.dart
+```
