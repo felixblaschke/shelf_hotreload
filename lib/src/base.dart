@@ -9,11 +9,10 @@ void withHotreload(FutureOr<HttpServer> Function() initializer) async {
   var obtainNewServer = (FutureOr<HttpServer> Function() initializer) async {
     var willReplaceServer = runningServer != null;
     await runningServer?.close(force: true);
-    runningServer = await initializer();
-
     if (willReplaceServer) {
-      print('\nApplication reloaded.');
+      print('___\n[shelf_hotreload] Application reloaded.');
     }
+    runningServer = await initializer();
   };
 
   try {
