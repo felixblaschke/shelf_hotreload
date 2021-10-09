@@ -1,5 +1,3 @@
-<!-- #code ../doc_files/example.dart -->
-```dart
 import 'dart:io';
 
 import 'package:shelf/shelf.dart' as shelf;
@@ -15,5 +13,3 @@ Future<HttpServer> createServer() {
   var handler = (shelf.Request request) => shelf.Response.ok('hot!');
   return io.serve(handler, 'localhost', 8080);
 }
-```
-<!-- // end of #code -->

@@ -1,7 +1,10 @@
+# shelf_hotreload
+
 Wrapper to easily enable hot-reload for shelf applications. 
 
 ## Usage
 
+<!-- #code doc_files/example.dart -->
 ```dart
 import 'dart:io';
 
@@ -19,6 +22,7 @@ Future<HttpServer> createServer() {
   return io.serve(handler, 'localhost', 8080);
 }
 ```
+<!-- // end of #code -->
 
 
 In order to enable hot-reload, you need to run your Dart application with `--enable-vm-service`. For example:

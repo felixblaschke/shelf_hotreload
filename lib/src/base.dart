@@ -6,6 +6,7 @@ import 'package:hotreloader/hotreloader.dart';
 void withHotreload(FutureOr<HttpServer> Function() initializer) async {
   HttpServer? runningServer;
 
+  // ignore: prefer_function_declarations_over_variables
   var obtainNewServer = (FutureOr<HttpServer> Function() initializer) async {
     var willReplaceServer = runningServer != null;
     await runningServer?.close(force: true);
