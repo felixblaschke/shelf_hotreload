@@ -1,3 +1,4 @@
+<!-- This file uses generated code. Visit https://pub.dev/packages/readme_helper for usage information. -->
 <!-- #code ../doc_files/example.dart -->
 ```dart
 import 'dart:io';
@@ -12,7 +13,7 @@ void main() async {
 }
 
 Future<HttpServer> createServer() {
-  var handler = (shelf.Request request) => shelf.Response.ok('hot!');
+  handler(shelf.Request request) => shelf.Response.ok('hot!');
   return io.serve(handler, 'localhost', 8080);
 }
 ```

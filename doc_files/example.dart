@@ -10,6 +10,6 @@ void main() async {
 }
 
 Future<HttpServer> createServer() {
-  var handler = (shelf.Request request) => shelf.Response.ok('hot!');
+  handler(shelf.Request request) => shelf.Response.ok('hot!');
   return io.serve(handler, 'localhost', 8080);
 }
