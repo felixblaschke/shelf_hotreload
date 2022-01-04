@@ -1,3 +1,8 @@
+## 1.0.1
+
+- Upgrade `hotreloader` dependency to be compatible with `integration_test` package
+- Upgrade example code style
+
 ## 1.0.0
 
 - Raise Dart minimum SDK version 2.14
