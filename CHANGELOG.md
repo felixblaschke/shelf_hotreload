@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Hot reload log messages are more unique
+
 ## 1.0.1
 
 - Upgrade `hotreloader` dependency to be compatible with `integration_test` package
