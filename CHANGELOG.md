@@ -1,3 +1,8 @@
+## 1.2.0
+
+- Added callbacks for custom logging output.
+- Update code base to Dart `2.17`
+
 ## 1.1.0
 
 - Hot reload log messages are more unique

@@ -1,11 +1,13 @@
 <!-- This file uses generated code. Visit https://pub.dev/packages/readme_helper for usage information. -->
+
 # shelf_hotreload
 
-Wrapper to easily enable hot-reload for shelf applications. 
+Wrapper to easily enable hot-reload for shelf applications.
 
 ## Usage
 
 <!-- #code doc_files/example.dart -->
+
 ```dart
 import 'dart:io';
 
@@ -23,12 +25,32 @@ Future<HttpServer> createServer() {
   return io.serve(handler, 'localhost', 8080);
 }
 ```
+
 <!-- // end of #code -->
 
+In order to enable hot-reload, you need to run your Dart application with `--enable-vm-service` (or use _debug run_ in your IDE).
 
-In order to enable hot-reload, you need to run your Dart application with `--enable-vm-service`. For example:
+For example:
+
 ```
-dart --enable-vm-service path/to/app.dart
+dart run --enable-vm-service path/to/app.dart
 ```
 
-**Important:** Your app will work nevertheless, even if you omit the flag.
+### Custom logging
+
+You can also also modify the default logging by providing callbacks:
+
+<!-- #code doc_files/custom_logging.dart -->
+
+```dart
+final myLogger = Logger();
+
+withHotreload(
+  () => createServer(),
+  onReloaded: () => myLogger.log('Reload!'),
+  onHotReloadNotAvailable: () => myLogger.log('No hot-reload :('),
+  onHotReloadAvailable: () => myLogger.log('Yay! Hot-reload :)'),
+);
+```
+
+<!-- // end of #code -->
