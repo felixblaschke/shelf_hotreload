@@ -61,8 +61,8 @@ void withHotreload(
   };
 
   /// Configure logging
-  HotReloader.logLevel = logLevel;
   logging.hierarchicalLoggingEnabled = true;
+  HotReloader.logLevel = logLevel;
   logging.Logger.root.onRecord.listen(onHotReloadLog);
 
   /// Function in charge of replacing the running http server
