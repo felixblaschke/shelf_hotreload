@@ -1,3 +1,7 @@
+## 1.3.0
+
+- Add `onHotReloadLog` and `logLevel` parameters
+
 ## 1.2.0
 
 - Added callbacks for custom logging output.

@@ -50,6 +50,8 @@ withHotreload(
   onReloaded: () => myLogger.log('Reload!'),
   onHotReloadNotAvailable: () => myLogger.log('No hot-reload :('),
   onHotReloadAvailable: () => myLogger.log('Yay! Hot-reload :)'),
+  onHotReloadLog: (log) => myLogger.log('Reload Log: ${log.message}'),
+  logLevel: Level.INFO,
 );
 ```
 
