@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:hotreloader/hotreloader.dart';
 import 'package:intl/intl.dart';
+import 'package:logging/logging.dart' as logging;
 
 /// Provides hot-reloading ability to code that providers an http server.
 ///
@@ -24,10 +25,17 @@ void withHotreload(
   /// If not set, it will `print()` a default message.
   FutureOr<void> Function()? onHotReloadAvailable,
 
-  /// Called once if hot-reload is not available (ee.g. no VM service available)
+  /// Called once if hot-reload is not available (e.g. no VM service available)
   ///
   /// If not set, it will `print()` a default message.
   FutureOr<void> Function()? onHotReloadNotAvailable,
+
+  /// Called every time a hot reload log is recorded.
+  FutureOr<void> Function(logging.LogRecord log)? onHotReloadLog,
+
+  /// The log level to use when calling `onHotReloadLog`.
+  /// By default logging is turned off.
+  logging.Level logLevel = logging.Level.OFF,
 }) async {
   /// Current server instance
   HttpServer? runningServer;
@@ -35,15 +43,27 @@ void withHotreload(
   /// Set default messages
   onReloaded ??= () {
     final time = DateFormat.Hms().format(DateTime.now());
-    print('[hotreload] $time - Application reloaded.');
+    stdout.writeln('[hotreload] $time - Application reloaded.');
   };
   onHotReloadAvailable ??= () {
-    print('[hotreload] Hot reload is enabled.');
+    stdout.writeln('[hotreload] Hot reload is enabled.');
   };
   onHotReloadNotAvailable ??= () {
-    print(
-        '[hotreload] Hot reload not enabled. Run this app with --enable-vm-service (or use debug run) in order to enable hot reload.');
+    stdout.writeln(
+      '[hotreload] Hot reload not enabled. Run this app with --enable-vm-service (or use debug run) in order to enable hot reload.',
+    );
   };
+  onHotReloadLog ??= (log) {
+    final time = DateFormat.Hms().format(log.time);
+    (log.level < logging.Level.SEVERE ? stdout : stderr).writeln(
+      '[hotreload] $time - ${log.message}',
+    );
+  };
+
+  /// Configure logging
+  logging.hierarchicalLoggingEnabled = true;
+  HotReloader.logLevel = logLevel;
+  logging.Logger.root.onRecord.listen(onHotReloadLog);
 
   /// Function in charge of replacing the running http server
   final obtainNewServer = (FutureOr<HttpServer> Function() create) async {
