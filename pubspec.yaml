@@ -1,6 +1,6 @@
 name: shelf_hotreload
 description: Wrapper to easily enable hot-reload for shelf applications.
-version: 1.3.0
+version: 1.4.0
 repository: https://github.com/felixblaschke/shelf_hotreload
 
 environment:
@@ -8,7 +8,6 @@ environment:
 
 dependencies:
   hotreloader: ^3.0.4
-  intl: ^0.17.0
   logging: ^1.0.2
 
 dev_dependencies:

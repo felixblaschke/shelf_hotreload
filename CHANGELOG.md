@@ -1,3 +1,7 @@
+## 1.4.0
+
+- Remove dependency to package `intl`.
+
 ## 1.3.0
 
 - Add `onHotReloadLog` and `logLevel` parameters
