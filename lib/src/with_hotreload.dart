@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:hotreloader/hotreloader.dart';
-import 'package:intl/intl.dart';
 import 'package:logging/logging.dart' as logging;
 
 /// Provides hot-reloading ability to code that providers an http server.
@@ -42,7 +41,7 @@ void withHotreload(
 
   /// Set default messages
   onReloaded ??= () {
-    final time = DateFormat.Hms().format(DateTime.now());
+    final time = _formatTime(DateTime.now());
     stdout.writeln('[hotreload] $time - Application reloaded.');
   };
   onHotReloadAvailable ??= () {
@@ -54,7 +53,7 @@ void withHotreload(
     );
   };
   onHotReloadLog ??= (log) {
-    final time = DateFormat.Hms().format(log.time);
+    final time = _formatTime(log.time);
     (log.level < logging.Level.SEVERE ? stdout : stderr).writeln(
       '[hotreload] $time - ${log.message}',
     );
@@ -101,4 +100,11 @@ void withHotreload(
   }
 
   await obtainNewServer(serverFactory);
+}
+
+String _formatTime(DateTime time) {
+  final hour = time.hour.toString().padLeft(2, '0');
+  final minute = time.minute.toString().padLeft(2, '0');
+  final second = time.second.toString().padLeft(2, '0');
+  return '$hour:$minute:$second';
 }
