@@ -1,3 +1,7 @@
+## 1.5.0
+
+- Upgraded dependencies
+
 ## 1.4.0
 
 - Remove dependency to package `intl`.
