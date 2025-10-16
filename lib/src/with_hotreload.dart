@@ -62,7 +62,7 @@ void withHotreload(
   /// Configure logging
   logging.hierarchicalLoggingEnabled = true;
   HotReloader.logLevel = logLevel;
-  logging.Logger.root.onRecord.listen(onHotReloadLog);
+  log.onRecord.listen(onHotReloadLog);
 
   /// Function in charge of replacing the running http server
   final obtainNewServer = (FutureOr<HttpServer> Function() create) async {
